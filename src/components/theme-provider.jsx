@@ -1,10 +1,10 @@
-import { createContext, useContext, useEffect } from "react"
 import { useAtom } from "jotai"
 import { atomWithStorage } from "jotai/utils"
+import { createContext, useContext, useEffect } from "react"
 
 const ThemeProviderContext = createContext(undefined)
 
-const themeAtom = atomWithStorage("vite-ui-theme", "system")
+const themeAtom = atomWithStorage("vite-ui-theme", "system")  
 
 export function ThemeProvider({ children, defaultTheme = "system", storageKey = "vite-ui-theme", ...props }) {
   const [theme, setTheme] = useAtom(themeAtom)
