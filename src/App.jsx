@@ -1,26 +1,26 @@
-import { atom, useAtom } from 'jotai'
+import Dashboard from './pages/Dashboard'
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
-import './App.css'
+import Layout from './components/layout'
+import Settings from './pages/setting'
 
-const counter = atom(0)
-import { Button } from './components/ui/button';
-import { ThemeToggleButton } from './components/custom/themeToggleButton';
-function App() {
-  const [count, setCounter] = useAtom(counter);
-  const increment = () => setCounter(prev => prev + 1);
-  const decrement = () => setCounter(next => next - 1);
+export default function App() {
   return (
-    <>
-        <h1>{count}</h1>
-        <div className="my-3"></div>
-        <Button onClick={increment}>increase</Button>
-        <div className="my-3"></div>
-        <Button onClick={decrement}>decrease</Button>
-        <div className="my-3"></div>
-        <ThemeToggleButton/>
-
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Dashboard />} />
+          <Route path="settings" element={<Settings />} />
+          <Route path="courses" element={<Dashboard />} />
+          <Route path="recent" element={<Dashboard />} />
+          <Route path="my-courses" element={<Dashboard />} />
+          <Route path="manage" element={<Dashboard />} />
+          <Route path="enrollment" element={<Dashboard />} />
+          {/* Redirect any unmatched routes to the dashboard */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
   )
 }
 
-export default App
