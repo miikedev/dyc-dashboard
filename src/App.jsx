@@ -1,7 +1,7 @@
-import Dashboard from './pages/Dashboard'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
 import Layout from './components/layout'
+import Dashboard from './pages/dashboard'
 import Settings from './pages/setting'
 
 export default function App() {
