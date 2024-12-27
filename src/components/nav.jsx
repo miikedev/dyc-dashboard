@@ -53,10 +53,10 @@ export function Nav() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="h-7 w-7 bg-[#dfdfdf50] hover:text-white"
+                className="h-7 w-7 bg-[#dfdfdf50]"
                 onClick={(event) => console.log(event.target)}
               >
-                <LayoutList className="hover:text-white z-10"/>
+                <LayoutList className=" z-10"/>
               </Button>
             </div>
           </div>
