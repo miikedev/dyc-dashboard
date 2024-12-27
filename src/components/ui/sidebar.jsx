@@ -1,15 +1,21 @@
+import * as React from "react"
+import { Slot } from "@radix-ui/react-slot"
+import { cva } from "class-variance-authority";
+import { PanelLeft } from "lucide-react"
+
+import { useIsMobile } from "@/hooks/use-mobile"
+import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Separator } from "@/components/ui/separator"
 import { Sheet, SheetContent } from "@/components/ui/sheet"
 import { Skeleton } from "@/components/ui/skeleton"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
-import { useIsMobile } from "@/hooks/use-mobile"
-import { cn } from "@/lib/utils"
-import { Slot } from "@radix-ui/react-slot"
-import { cva } from "class-variance-authority";
-import { PanelLeft } from "lucide-react"
-import * as React from "react"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 
 const SIDEBAR_COOKIE_NAME = "sidebar:state"
 const SIDEBAR_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
@@ -225,7 +231,7 @@ const SidebarTrigger = React.forwardRef(({ className, onClick, ...props }, ref) 
         toggleSidebar()
       }}
       {...props}>
-      <PanelLeft />
+      <PanelLeft className="scale-125" />
       <span className="sr-only">Toggle Sidebar</span>
     </Button>)
   );

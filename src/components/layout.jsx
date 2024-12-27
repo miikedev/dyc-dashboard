@@ -1,22 +1,28 @@
-import { Outlet } from 'react-router-dom'
-
-import { AppSidebar } from './app-sidebar'
-import { Nav } from './nav'
-import { SidebarProvider } from './ui/sidebar'
-
-export default function Layout() {
+import { AppSidebar } from "@/components/app-sidebar"
+import { Outlet } from "react-router"
+import {
+  SidebarInset,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar"
+import { Nav } from "./nav"
+export default function Page() {
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen flex-col bg-background">
+      <AppSidebar />
+      <SidebarInset>
         <Nav />
-        <div className="flex">
-          <AppSidebar />
-          <main className="">
-            <Outlet />
-          </main>
+        
+        <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+          <Outlet />
+          {/* <div className="grid auto-rows-min gap-4 md:grid-cols-3">
+            <div className="aspect-video rounded-xl bg-muted/50" />
+            <div className="aspect-video rounded-xl bg-muted/50" />
+            <div className="aspect-video rounded-xl bg-muted/50" />
+          </div>
+          <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" /> */}
         </div>
-      </div>
+      </SidebarInset>
     </SidebarProvider>
   )
 }
-

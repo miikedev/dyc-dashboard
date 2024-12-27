@@ -3,12 +3,12 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import Layout from './components/layout'
 import Dashboard from './pages/dashboard'
 import Settings from './pages/setting'
-
+import Auth from './pages/auth'
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Layout />}>
+        <Route path="/dashboard" element={<Layout />}>
           <Route index element={<Dashboard />} />
           <Route path="settings" element={<Settings />} />
           <Route path="courses" element={<Dashboard />} />
