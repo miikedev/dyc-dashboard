@@ -3,7 +3,7 @@ import Layout from './components/layout'
 import AuthLayout from './components/authLayout'
 import Dashboard from './pages/dashboard'
 import Settings from './pages/setting'
-import Login from './pages/Login'
+import Login from './pages/login'
 import Register from './pages/register'
 
 // This is a mock function. Replace it with your actual auth check
