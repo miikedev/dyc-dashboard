@@ -42,8 +42,22 @@ export function Nav() {
               <SidebarTrigger className="-ml-1" />
             </div>
             <div className="flex items-center gap-1">
-              <LayoutGrid />
-              <LayoutList className="text-muted"/>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-7 w-7"
+                onClick={(event) => console.log(event.target)}
+              >
+                <LayoutGrid />
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-7 w-7 bg-[#dfdfdf50] hover:text-white"
+                onClick={(event) => console.log(event.target)}
+              >
+                <LayoutList className="hover:text-white z-10"/>
+              </Button>
             </div>
           </div>
           {/* <Separator orientation="vertical" className="mr-2 h-4" />

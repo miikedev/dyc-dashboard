@@ -1,11 +1,11 @@
 'use client'
-
+import { ChevronDown } from "lucide-react"
 import { useEffect, useState } from "react"
 import { CourseCard } from "@/components/course-card"
 import { SkeletonCard } from "@/components/skeleton-card"
 import { Pagination, PaginationContent, PaginationEllipsis, PaginationItem, PaginationLink, PaginationNext, PaginationPrevious } from "@/components/ui/pagination"
 import image from '../assets/image.png'
-
+import { Button } from "@/components/ui/button"
 export default function Dashboard() {
   const [isLoading, setIsLoading] = useState(true)
 
@@ -41,7 +41,15 @@ export default function Dashboard() {
             ))}
       </div>
       <div className="min-h-[100vh] flex-1 rounded-xl bg-muted/50 md:min-h-min" />
-      <div className="flex flex-end mt-5">
+      <div className="flex justify-end mt-5 items-center">
+        <div className="flex items-center">
+        <div className="flex w-1/2 gap-2 items-center">
+        <p className="text-[.9rem] w-[6.5rem] font-light">Rows per page</p>
+        <Button variant="outline" className="">
+          <span>10</span>
+          <ChevronDown className="ml-1" />
+        </Button>
+        </div>
         <Pagination>
           <PaginationContent>
             <PaginationItem>
@@ -58,6 +66,7 @@ export default function Dashboard() {
             </PaginationItem>
           </PaginationContent>
         </Pagination>
+        </div>
       </div>
     </div>
   )
