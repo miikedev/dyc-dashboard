@@ -1,7 +1,16 @@
-import { Box, Clock, Filter, LayoutGrid, Settings, Users } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
-
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "./ui/sidebar"
+import { Box, Filter, LayoutGrid, Clock, Settings, Users } from 'lucide-react'
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuItem,
+  SidebarMenuButton,
+} from "./ui/sidebar"
 
 export function AppSidebar() {
   const location = useLocation()
