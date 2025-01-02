@@ -10,7 +10,7 @@ import Module from './pages/module'
 import Activity from './pages/activity'
 import Manage from './pages/manage'
 import Enroll from './pages/enroll'
-// This is a mock function. Replace it with your actual auth check
+
 const isAuthenticated = () => {
   return localStorage.getItem('token') !== null
 }

@@ -12,9 +12,6 @@ export default function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    // Implement your login logic here
-    console.log('Login attempt', { email, password })
-    // For demo purposes, we'll just set a token and redirect
     localStorage.setItem('token', 'demo-token')
     navigate('/dashboard/course')
   }
