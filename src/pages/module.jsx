@@ -32,7 +32,7 @@ export default function Module() {
             {modules.map((module) => (
               <div
                 key={module.id}
-                className="scale-95 flex items-center justify-between p-4 rounded-lg shadow-md   transition-colors"
+                className="scale-95  hover:bg-[#dddddd30] flex items-center justify-between p-4 rounded-lg transition-colors"
                 onClick={() => handleModule(module.id)}
               >
                 <div className="flex items-center space-x-4">

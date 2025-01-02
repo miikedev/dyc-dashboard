@@ -54,7 +54,7 @@ function SortableActivity({ activity }) {
     <div
     //   ref={setNodeRef}
     //   style={style}
-      className={`flex items-center justify-between p-4 rounded-lg hover:bg-[#dddddd30] transition-colors 
+      className={`scale-95 flex items-center justify-between p-4 rounded-lg hover:bg-[#dddddd30] transition-colors 
 
         // isDragging ? 'ring-2 ring-primary' : ''
     //   }
@@ -81,7 +81,7 @@ function SortableActivity({ activity }) {
           <p className="text-sm text-gray-400">Edited by {activity.editedBy}</p>
           <p className="text-sm text-gray-400">Date modified: {activity.dateModified}</p>
         </div>
-        <Button variant="ghost" size="icon" className="text-gray-400">
+        <Button variant="ghost" size="icon" className="text-gray-400 hover:bg-transparent">
           <MoreVertical className="h-5 w-5" />
         </Button>
       </div>
