@@ -20,7 +20,7 @@ export default function Register() {
     console.log('Registration attempt', { email, password })
     // For demo purposes, we'll just set a token and redirect
     localStorage.setItem('token', 'demo-token')
-    navigate('/dashboard')
+    navigate('/dashboard/course')
   }
 
   return (

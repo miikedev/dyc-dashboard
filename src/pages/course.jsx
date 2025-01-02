@@ -6,9 +6,9 @@ import { SkeletonCard } from "@/components/skeleton-card"
 import image from '../assets/image.png'
 import { PaginationSection } from "@/components/pagination-section"
 import { Button } from "@/components/ui/button"
+
 export default function Course() {
   const [isLoading, setIsLoading] = useState(true)
-
   useEffect(() => {
     // Simulate data loading
     const timer = setTimeout(() => {
@@ -17,7 +17,6 @@ export default function Course() {
 
     return () => clearTimeout(timer)
   }, [])
-
   return (
     <div className="p-2">
       <div className="mb-6">
@@ -34,6 +33,7 @@ export default function Course() {
           : Array.from({ length: 12 }).map((_, i) => (
               <CourseCard
                 key={i}
+                id={i}
                 title="React Course"
                 author="Username"
                 image={image}
