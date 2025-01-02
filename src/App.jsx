@@ -7,9 +7,9 @@ import Login from './pages/login'
 import Register from './pages/register'
 import Settings from './pages/setting'
 import Module from './pages/module'
-import { useQueryState } from 'nuqs'
 import Activity from './pages/activity'
-
+import Manage from './pages/manage'
+import Enroll from './pages/enroll'
 // This is a mock function. Replace it with your actual auth check
 const isAuthenticated = () => {
   return localStorage.getItem('token') !== null
@@ -46,8 +46,8 @@ export default function App() {
           <Route path="courses" element={<Course />} />
           <Route path="recent" element={<Course />} />
           <Route path="my-courses" element={<Course />} />
-          <Route path="manage" element={<Course />} />
-          <Route path="enrollment" element={<Course />} />
+          <Route path="manage" element={<Manage />} />
+          <Route path="enrollment" element={<Enroll />} />
           {/* Redirect any unmatched routes to the dashboard */}
           <Route path="*" element={<Navigate to="/dashboard/course" replace />} />
         </Route>
