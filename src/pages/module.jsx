@@ -2,22 +2,50 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { MoreVertical, Folder } from 'lucide-react'
 import { Button } from "@/components/ui/button"
 import { PaginationSection } from "@/components/pagination-section"
+import update from "immutability-helper"
 // interface ModuleItem {
 //   id: string
 //   title: string
 //   activity: string
 //   editedBy: string
 //   dateModified: string
-
+import { useDrop } from "react-dnd"
 import { modules } from "@/data/modules"
 import { useNavigate, useParams } from "react-router"
-
-export default function Module() {
+import { useCallback, useState, memo } from "react"
+const Module = memo( function Module() {
+    const [cards, setCards] = useState(modules)
     const { courseId } = useParams()
     const navigate = useNavigate()
     const handleModule = (id) => {
         navigate(`/dashboard/course/${courseId}/module/${id}/activity`)
     }
+    const findCard = useCallback(
+        (id) => {
+          const card = cards.filter((c) => `${c.id}` === id)[0]
+          return {
+            card,
+            index: cards.indexOf(card),
+          }
+        },
+        [cards],
+      )
+      const moveCard = useCallback(
+        (id, atIndex) => {
+          const { card, index } = findCard(id)
+          setCards(
+            update(cards, {
+              $splice: [
+                [index, 1],
+                [atIndex, 0, card],
+              ],
+            }),
+          )
+        },
+        [findCard, cards, setCards],
+      )
+      const [, drop] = useDrop(() => ({ accept: 'card' }))
+  
   return (
     <div className="min-h-screen p-6">
       <Card className="border-none shadow-none">
@@ -33,7 +61,9 @@ export default function Module() {
               <div
                 key={module.id}
                 className="scale-95  hover:bg-[#dddddd30] flex items-center justify-between p-4 rounded-lg transition-colors"
-                onClick={() => handleModule(module.id)}
+                onDoubleClick={() => handleModule(module.id)}
+                moveCard={moveCard}
+                findCard={findCard}
               >
                 <div className="flex items-center space-x-4">
                   <div className="w-8 h-8 flex items-center justify-center">
@@ -62,4 +92,5 @@ export default function Module() {
     </div>
   )
 }
-
+)
+export default Module

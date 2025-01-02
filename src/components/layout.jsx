@@ -5,6 +5,8 @@ import {
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar"
+import { DndProvider } from "react-dnd"
+import { HTML5Backend } from "react-dnd-html5-backend"
 
 import { Nav } from "./nav"
 export default function Page() {
@@ -15,7 +17,9 @@ export default function Page() {
         <Nav />
         
         <div className="flex flex-1 flex-col gap-4 p-4 pt-0">
+            <DndProvider backend={HTML5Backend}>
             <Outlet />
+            </DndProvider>
           {/* <div className="grid auto-rows-min gap-4 md:grid-cols-3">
             <div className="aspect-video rounded-xl bg-muted/50" />
             <div className="aspect-video rounded-xl bg-muted/50" />
