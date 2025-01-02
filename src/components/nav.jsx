@@ -2,11 +2,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "@/components/ui/breadcrumb"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { ChevronRight, Search, User, LayoutList, LayoutGrid } from 'lucide-react'
-
 import { Separator } from "@/components/ui/separator"
+import { ChevronRight, LayoutGrid, LayoutList, Search, User } from 'lucide-react'
+
 import { SidebarTrigger } from "./ui/sidebar"
+import { useParams } from "react-router"
 export function Nav() {
+  const {courseId, moduleId} = useParams() 
+
   return (
     <nav className="w-full border-b border-border/40 bg-background/95 sticky top-0 z-50">
       <div className="flex h-14 items-center justify-between px-4 gap-4">
@@ -16,14 +19,24 @@ export function Nav() {
               <BreadcrumbItem>
                 <BreadcrumbLink href="/dashboard/course">Course</BreadcrumbLink>
               </BreadcrumbItem>
+              {courseId && 
+              <>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href="/dashboard/module">Module</BreadcrumbLink>
+                <BreadcrumbLink href={`/dashboard/course/${courseId}/module`}>Module</BreadcrumbLink>
               </BreadcrumbItem>
+              </>
+              }
+              
+              {courseId && moduleId && 
+              <>
               <BreadcrumbSeparator />
-              {/* <BreadcrumbItem>
-                <BreadcrumbPage>Breadcrumb</BreadcrumbPage>
-              </BreadcrumbItem> */}
+              <BreadcrumbItem>
+                <BreadcrumbLink href={`/dashboard/course/${courseId}/module/${moduleId}/activity`}>Activity</BreadcrumbLink>
+              </BreadcrumbItem>
+              </>
+              }
+
             </BreadcrumbList>
           </Breadcrumb>
         </div>

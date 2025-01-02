@@ -8,14 +8,19 @@ import { PaginationSection } from "@/components/pagination-section"
 //   activity: string
 //   editedBy: string
 //   dateModified: string
-// }
 
 import { modules } from "@/data/modules"
+import { useNavigate, useParams } from "react-router"
 
 export default function Module() {
+    const { courseId } = useParams()
+    const navigate = useNavigate()
+    const handleModule = (id) => {
+        navigate(`/dashboard/course/${courseId}/module/${id}/activity`)
+    }
   return (
-    <div className="min-h-screen bg-black p-6">
-      <Card className="bg-black border-none text-white">
+    <div className="min-h-screen p-6">
+      <Card className="border-none shadow-none">
         <CardHeader>
           <CardTitle className="text-2xl font-bold">Module</CardTitle>
           <CardDescription className="text-gray-400">
@@ -27,14 +32,15 @@ export default function Module() {
             {modules.map((module) => (
               <div
                 key={module.id}
-                className="flex items-center justify-between p-4 rounded-lg bg-zinc-900 hover:bg-zinc-800 transition-colors"
+                className="scale-95 flex items-center justify-between p-4 rounded-lg shadow-md   transition-colors"
+                onClick={() => handleModule(module.id)}
               >
                 <div className="flex items-center space-x-4">
                   <div className="w-8 h-8 flex items-center justify-center">
-                    <Folder className="w-6 h-6 text-blue-500" />
+                    <Folder className="w-6 h-6" />
                   </div>
                   <div>
-                    <h3 className="font-medium text-white">{module.title}</h3>
+                    <h3 className="font-medium">{module.title}</h3>
                     <p className="text-sm text-gray-400">{module.activity}</p>
                   </div>
                 </div>
@@ -43,7 +49,7 @@ export default function Module() {
                     <p className="text-sm text-gray-400">Edited by {module.editedBy}</p>
                     <p className="text-sm text-gray-400">Date modified: {module.dateModified}</p>
                   </div>
-                  <Button variant="ghost" size="icon" className="text-gray-400 hover:text-white">
+                  <Button variant="ghost" size="icon" className="text-gray-400 hover:bg-transparent">
                     <MoreVertical className="h-5 w-5" />
                   </Button>
                 </div>
@@ -52,7 +58,7 @@ export default function Module() {
           </div>
         </CardContent>
       </Card>
-      <PaginationSection />
+      <PaginationSection className="scale-95 mx-[2rem]" />
     </div>
   )
 }

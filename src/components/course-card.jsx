@@ -9,10 +9,14 @@ import image from '../assets/card-image.jpg'
 //   author: string
 //   image: string
 // }
-
-export function CourseCard({ title, author }) {
+import { useNavigate } from "react-router"
+export function CourseCard({ title, author, id }) {
+  const navigate = useNavigate()
+  const handleCourseClick = (id) => {
+    navigate(`/dashboard/course/${id}/module`)
+  }
   return (
-    <Card className="bg-card/50 border-border/40">
+    <Card className="bg-card/50 border-border/40" onClick={() => handleCourseClick(id)}>
       <CardHeader className="p-0">
         <div className="relative aspect-video">
           <img
