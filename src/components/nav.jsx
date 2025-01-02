@@ -14,11 +14,11 @@ export function Nav() {
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
-                <BreadcrumbLink href="/">Course</BreadcrumbLink>
+                <BreadcrumbLink href="/dashboard/course">Course</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               <BreadcrumbItem>
-                <BreadcrumbLink href="/components">Module</BreadcrumbLink>
+                <BreadcrumbLink href="/dashboard/module">Module</BreadcrumbLink>
               </BreadcrumbItem>
               <BreadcrumbSeparator />
               {/* <BreadcrumbItem>

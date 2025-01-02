@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+
 import { Button } from '../components/ui/button'
 import { Input } from '../components/ui/input'
 import { Label } from '../components/ui/label'
@@ -15,7 +16,7 @@ export default function Login() {
     console.log('Login attempt', { email, password })
     // For demo purposes, we'll just set a token and redirect
     localStorage.setItem('token', 'demo-token')
-    navigate('/dashboard')
+    navigate('/dashboard/course')
   }
 
   return (
