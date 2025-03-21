@@ -1,8 +1,8 @@
-import { api, constructUrl } from "./axios-config";
+import { api, constructApiUrl } from "./axios-config";
 
 const getNewsletters = async() => {
     try {
-        const response = await api.get(constructUrl("/newsletters"));
+        const response = await api.get(constructApiUrl("/newsletters"));
         return response.data.newsletters;
     } catch (error) {
         console.error(error);
@@ -12,7 +12,7 @@ const getNewsletters = async() => {
 
 const createANewsletter = async({values}) => {
     try {
-        const response = await api.post(constructUrl("/newsletter"),{...values});
+        const response = await api.post(constructApiUrl("/newsletter"),{...values});
         return response.data;
     } catch (error) {
         console.error(error);
@@ -22,7 +22,7 @@ const createANewsletter = async({values}) => {
 
 const updateNewsletter = async({id, values}) => {
     try {
-        const response = await api.put(constructUrl("/newsletter/"+id),{...values});
+        const response = await api.put(constructApiUrl("/newsletter/"+id),{...values});
         return response.data;
     } catch (error) {
         console.error(error);
@@ -32,7 +32,7 @@ const updateNewsletter = async({id, values}) => {
 
 const deleteNewsletter = async({id}) => {
     try {
-        const response = await api.delete(constructUrl("/newsletter/"+id));
+        const response = await api.delete(constructApiUrl("/newsletter/"+id));
         return response.data;
     } catch (error) {
         console.error(error);

@@ -1,9 +1,9 @@
-import { authApi, constructUrl } from "./axios-config";
+import { authApi, constructAuthUrl } from "./axios-config";
 
 const login = async (email, password) => {
-    console.log(constructUrl("/token"))
+    console.log(constructAuthUrl("/token"))
   try {
-    const response = await authApi.post(constructUrl("/token"), {
+    const response = await authApi.post(constructAuthUrl("/token"), {
       email,
       password,
     });
