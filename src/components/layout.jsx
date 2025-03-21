@@ -8,6 +8,7 @@ import { Nav } from "./nav"
 
 export default function Page({setIsAuthenticated}) {
   const handleLogout = () => {
+    console.log('logout')
     localStorage.removeItem('token');
     setIsAuthenticated(false); // Update authentication state
   };
