@@ -10,19 +10,39 @@ import Module from './pages/module'
 import Activity from './pages/activity'
 import Manage from './pages/manage'
 import Enroll from './pages/enroll'
+import { useEffect, useState } from 'react'
+import Overviews from './pages/overviews'
+import Candidates from './pages/candidates'
+import Subscribers from './pages/subscribers'
+import Blogs from './pages/blogs'
+import Newsletter from './pages/newsletter'
 
-const isAuthenticated = () => {
+const checkAuth = () => {
   return localStorage.getItem('token') !== null
 }
 
 const ProtectedRoute = ({ children }) => {
-  if (!isAuthenticated()) {
+  if (!checkAuth()) {
     return <Navigate to="/login" replace />
   }
   return children
 }
 
 export default function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(checkAuth());
+
+  useEffect(() => {
+    const handleStorageChange = () => {
+      setIsAuthenticated(checkAuth()); // Update state on localStorage change
+    };
+
+    window.addEventListener('storage', handleStorageChange);
+
+    // Clean up listener on unmount
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
+  }, [isAuthenticated]);
   return (
     <BrowserRouter>
       <Routes>
@@ -35,19 +55,18 @@ export default function App() {
           path="/dashboard" 
           element={
             <ProtectedRoute>
-              <Layout/>
+              <Layout setIsAuthenticated={setIsAuthenticated}/>
             </ProtectedRoute>
           }
         >
-          <Route path="course" element={<Course />} />
-          <Route path="course/:courseId/module" element={<Module/>} />
-          <Route path="course/:courseId/module/:moduleId/activity" element={<Activity />} />
-          <Route path="settings" element={<Settings />} />
-          <Route path="courses" element={<Course />} />
-          <Route path="recent" element={<Course />} />
-          <Route path="my-courses" element={<Course />} />
-          <Route path="manage" element={<Manage />} />
-          <Route path="enrollment" element={<Enroll />} />
+          <Route path="overviews" element={<Overviews />} />
+          <Route path="candidates" element={<Candidates />} />
+          <Route path="subscribers" element={<Subscribers />} />
+          <Route path="blogs" element={<Blogs />} />
+          <Route path="newsletter" element={<Newsletter />} />
+
+
+
           {/* Redirect any unmatched routes to the dashboard */}
           <Route path="*" element={<Navigate to="/dashboard/course" replace />} />
         </Route>

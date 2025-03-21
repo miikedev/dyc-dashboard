@@ -1,7 +1,8 @@
-import { buttonVariants } from "@/components/ui/button";
-import { cn } from "@/lib/utils"
-import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
 import * as React from "react"
+import { ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
+
+import { cn } from "@/lib/utils"
+import { buttonVariants } from "@/components/ui/button";
 
 const Pagination = ({
   className,
@@ -10,7 +11,7 @@ const Pagination = ({
   <nav
     role="navigation"
     aria-label="pagination"
-    className={cn("mx-auto flex w-full justify-end", className)}
+    className={cn("mx-auto flex w-full justify-center", className)}
     {...props} />
 )
 Pagination.displayName = "Pagination"

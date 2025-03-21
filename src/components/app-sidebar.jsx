@@ -1,5 +1,5 @@
 import { Link, useLocation,useSearchParams } from 'react-router-dom'
-import { Box, Filter, LayoutGrid, Clock, Settings, Users } from 'lucide-react'
+import { Box, Filter, LayoutGrid, BookCheck, Settings, LayoutDashboard, MailIcon, Users, Newspaper } from 'lucide-react'
 import {
   Sidebar,
   SidebarContent,
@@ -10,10 +10,19 @@ import {
   SidebarMenu,
   SidebarMenuItem,
   SidebarMenuButton,
+  SidebarFooter
 } from "./ui/sidebar"
 import NavSidebar from './nav-sidebar'
+import NavUser from './nav-user'
 import { getSidebarNavText } from '@/lib/getSidebarNavText'
-export function AppSidebar() {
+const data = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+}
+export function AppSidebar({handleLogout}) {
   const location= useLocation()
   const navigationText = getSidebarNavText(location.pathname)
   return (
@@ -21,7 +30,8 @@ export function AppSidebar() {
       <SidebarHeader className="p-4">
         <div className="flex items-center gap-2">
           <div className="rounded bg-white/10 p-1">
-            <Box className="h-6 w-6" />
+            {/* <Box className="h-6 w-6" /> */}
+            <img src="/logo.svg" alt="dyc logo" />
           </div>
           <div>
             <h3 className="font-semibold">Acme Inc</h3>
@@ -30,8 +40,7 @@ export function AppSidebar() {
         </div>
       </SidebarHeader>
       <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Platform</SidebarGroupLabel>
+        {/* <SidebarGroup>
           <SidebarGroupContent>
             <SidebarMenu>
               <SidebarMenuItem>
@@ -69,31 +78,48 @@ export function AppSidebar() {
               </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
-        </SidebarGroup>
+        </SidebarGroup> */}
         <SidebarGroup>
           <SidebarGroupContent>
-            <SidebarMenu>
+          <SidebarGroupLabel>Dashboard Features</SidebarGroupLabel>
+            <SidebarMenu className="mt-[1rem]">
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavSidebar to="/dashboard/manage">
-                    <Users className="h-4 w-4" />
-                    <span>Manage</span>
+                  <NavSidebar to="/dashboard/overviews">
+                    <LayoutDashboard className="h-4 w-4" />
+                    <span>Overviews</span>
                   </NavSidebar>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavSidebar to="/dashboard/enrollment">
-                    <Users className="h-4 w-4" />
-                    <span>Enrollment</span>
+                  <NavSidebar to="/dashboard/subscribers">
+                    <MailIcon className="h-4 w-4" />
+                    <span>Subscribers</span>
                   </NavSidebar>
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavSidebar to="/dashboard/settings">
-                    <Settings className="h-4 w-4" />
-                    <span>Settings</span>
+                  <NavSidebar to="/dashboard/candidates">
+                    <Users className="h-4 w-4" />
+                    <span>Candidates</span>
+                  </NavSidebar>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavSidebar to="/dashboard/blogs">
+                    <BookCheck className="h-4 w-4" />
+                    <span>Blogs</span>
+                  </NavSidebar>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <NavSidebar to="/dashboard/newsletter">
+                    <Newspaper className="h-4 w-4" />
+                    <span>Newsletter</span>
                   </NavSidebar>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -101,6 +127,9 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
+      <SidebarFooter>
+        <NavUser handleLogout={handleLogout} user={data.user} />
+      </SidebarFooter>
       </Sidebar>
   )
 }
