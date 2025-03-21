@@ -75,7 +75,7 @@ export default function Overviews() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {overviews.recentBlogs.map((i) => (
+              {overviews?.recentBlogs.map((i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded bg-muted flex items-center justify-center">
                     <FileText className="h-6 w-6 text-muted-foreground" />
@@ -97,7 +97,7 @@ export default function Overviews() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {overviews.recentSubscribers.map((i) => (
+              {overviews?.recentSubscribers.map((i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded bg-muted flex items-center justify-center">
                     <Mail className="h-6 w-6 text-muted-foreground" />
