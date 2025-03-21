@@ -1,10 +1,10 @@
 
-import { uploadApi, constructUrl } from "./axios-config";
+import { uploadApi, constructUploadUrl } from "./axios-config";
 
 const upload = async(formData) => {
-    console.log(constructUrl('/upload'))
+    console.log(constructUploadUrl('/upload'))
     try {
-        const response = await uploadApi.post(constructUrl('/upload'),formData);
+        const response = await uploadApi.post(constructUploadUrl('/upload'),formData);
         return response.data;
     } catch (error) {
         console.error(error);
@@ -24,7 +24,7 @@ const deleteUrls = async (urls) => {
       });
   
       // Make DELETE request with proper body format
-      const response = await uploadApi.delete(constructUrl(`/delete`), {
+      const response = await uploadApi.delete(constructUploadUrl(`/delete`), {
         data: { keys } // Send as JSON body with array of keys
       });
       console.log("Files deleted successfully:", response.data);

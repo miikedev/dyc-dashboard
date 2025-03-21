@@ -1,8 +1,8 @@
-import { api, constructUrl } from "./axios-config";
+import { api, constructApiUrl } from "./axios-config";
 
 const getBlogs = async() => {
     try {
-        const response = await api.get(constructUrl("/blogs"));
+        const response = await api.get(constructApiUrl("/blogs"));
         return response.data.blogs;
     } catch (error) {
         console.error(error);
@@ -12,7 +12,7 @@ const getBlogs = async() => {
 
 const createABlog = async({values}) => {
     try {
-        const response = await api.post(constructUrl("/blogs"),{...values});
+        const response = await api.post(constructApiUrl("/blogs"),{...values});
         return response.data;
     } catch (error) {
         console.error(error);
@@ -22,7 +22,7 @@ const createABlog = async({values}) => {
 
 const updateBlogs = async({id, values}) => {
     try {
-        const response = await api.put(constructUrl("/blogs/"+id),{...values});
+        const response = await api.put(constructApiUrl("/blogs/"+id),{...values});
         return response.data;
     } catch (error) {
         console.error(error);
@@ -32,7 +32,7 @@ const updateBlogs = async({id, values}) => {
 
 const deleteBlog = async({id}) => {
     try {
-        const response = await api.delete(constructUrl("/blogs/"+id));
+        const response = await api.delete(constructApiUrl("/blogs/"+id));
         return response.data;
     } catch (error) {
         console.error(error);

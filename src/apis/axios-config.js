@@ -1,6 +1,9 @@
 import axios from "axios";
 
+const AUTH_API_BASE_URL = import.meta.env.VITE_AUTH_API_BASE_URL || ""; // Fallback to empty string
+const UPLOAD_API_BASE_URL = import.meta.env.VITE_UPLOAD_API_BASE_URL || ""; // Fallback to empty string
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ""; // Fallback to empty string
+
 const IS_PRODUCTION = import.meta.env.VITE_ENV === "production";
 console.log(IS_PRODUCTION);
 console.log(API_BASE_URL);
@@ -11,16 +14,24 @@ const api = axios.create({
 });
 
 const authApi = axios.create({
-  baseURL: IS_PRODUCTION ? API_BASE_URL : "/auth",
+  baseURL: IS_PRODUCTION ? AUTH_API_BASE_URL : "/auth",
 });
 
 const uploadApi = axios.create({
-  baseURL: IS_PRODUCTION ? API_BASE_URL : "/upload",
+  baseURL: IS_PRODUCTION ? UPLOAD_API_BASE_URL : "/upload",
 });
 
 // URL construction function
-const constructUrl = (path) => {
+const constructApiUrl = (path) => {
   return `${IS_PRODUCTION ? API_BASE_URL : ""}${path}`;
+};
+
+const constructAuthUrl = (path) => {
+  return `${IS_PRODUCTION ? AUTH_API_BASE_URL : ""}${path}`;
+};
+
+const constructUploadUrl = (path) => {
+  return `${IS_PRODUCTION ? UPLOAD_API_BASE_URL : ""}${path}`;
 };
 
 // Request Interceptor: Attach Access Token
@@ -58,4 +69,4 @@ api.interceptors.request.use(
 //   }
 // );
 
-export { api, authApi, uploadApi, constructUrl };
+export { api, authApi, uploadApi, constructApiUrl, constructAuthUrl, constructUploadUrl };
