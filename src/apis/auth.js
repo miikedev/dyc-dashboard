@@ -9,7 +9,7 @@ const login = async (email, password) => {
     });
 
     // Return the full response for successful logins
-    return response.data; // or response if you want to return the whole response object
+    return response; // or response if you want to return the whole response object
   } catch (error) {
     // Check if error response exists and return a meaningful message
     console.log(error.response);
