@@ -5,26 +5,37 @@ import { toast } from "sonner"
 import { useEffect, useState } from "react"
 import { formatDate } from "@/lib/formatDate"
 
-
 export default function Overviews() {
-  const [overviews, setOverviews] = useState({})
-  const [isLoading, setIsLoading] = useState(true)
+  const [overviews, setOverviews] = useState({
+    totalCandidates: 0,
+    newCandidateCount: 0,
+    totalBlogs: 0,
+    newBlogsCount: 0,
+    totalSubscribers: 0,
+    newSubscribersCount: 0,
+    recentBlogs: [],
+    recentSubscribers: [],
+  });
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchOverviews = async () => {
       try {
-        const data = await getOverviews()
-        setOverviews(data)
+        const data = await getOverviews();
+        setOverviews(data);
       } catch (error) {
-        toast("Failed to fetch candidates.")
+        toast("Failed to fetch overviews.");
       } finally {
-        setIsLoading(false)
+        setIsLoading(false);
       }
-    }
-    fetchOverviews()
-  }, [toast])
+    };
+    fetchOverviews();
+  }, []);
 
-  console.log('overviews', overviews)
+  if (isLoading) {
+    return <div>Loading...</div>; // You can replace this with a loading spinner or skeleton
+  }
+
   return (
     <div className="space-y-6 mt-[1rem]">
       <div>
@@ -75,14 +86,14 @@ export default function Overviews() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {overviews?.recentBlogs.map((i) => (
-                <div key={i} className="flex items-center gap-4">
+              {overviews.recentBlogs.map((blog) => (
+                <div key={blog._id} className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded bg-muted flex items-center justify-center">
                     <FileText className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <div>
-                    <p className="font-medium">Blog Post Title {i.title}</p>
-                    <p className="text-sm text-muted-foreground">Published on {formatDate(i.createdAt)}</p>
+                    <p className="font-medium">{blog.title}</p>
+                    <p className="text-sm text-muted-foreground">Published on {formatDate(blog.createdAt)}</p>
                   </div>
                 </div>
               ))}
@@ -97,14 +108,14 @@ export default function Overviews() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {overviews?.recentSubscribers.map((i) => (
-                <div key={i} className="flex items-center gap-4">
+              {overviews.recentSubscribers.map((subscriber) => (
+                <div key={subscriber._id} className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded bg-muted flex items-center justify-center">
                     <Mail className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <div>
-                    <p className="font-medium">{i.email}</p>
-                    <p className="text-sm text-muted-foreground">Subscribed on {formatDate(i.createdAt)}</p>
+                    <p className="font-medium">{subscriber.email}</p>
+                    <p className="text-sm text-muted-foreground">Subscribed on {formatDate(subscriber.createdAt)}</p>
                   </div>
                 </div>
               ))}
@@ -113,6 +124,5 @@ export default function Overviews() {
         </Card>
       </div>
     </div>
-  )
+  );
 }
-
