@@ -1,7 +1,30 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Users, FileText, Mail } from "lucide-react"
+import { getOverviews } from "@/apis/overviews"
+import { toast } from "sonner"
+import { useEffect, useState } from "react"
+import { formatDate } from "@/lib/formatDate"
+
 
 export default function Overviews() {
+  const [overviews, setOverviews] = useState({})
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const fetchOverviews = async () => {
+      try {
+        const data = await getOverviews()
+        setOverviews(data)
+      } catch (error) {
+        toast("Failed to fetch candidates.")
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    fetchOverviews()
+  }, [toast])
+
+  console.log('overviews', overviews)
   return (
     <div className="space-y-6 mt-[1rem]">
       <div>
@@ -16,8 +39,8 @@ export default function Overviews() {
             <Users className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">12</div>
-            <p className="text-xs text-muted-foreground">+2 added this month</p>
+            <div className="text-2xl font-bold">{overviews.totalCandidates}</div>
+            <p className="text-xs text-muted-foreground">+{overviews.newCandidateCount} added this month</p>
           </CardContent>
         </Card>
 
@@ -27,8 +50,8 @@ export default function Overviews() {
             <FileText className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">24</div>
-            <p className="text-xs text-muted-foreground">+5 published this month</p>
+            <div className="text-2xl font-bold">{overviews.totalBlogs}</div>
+            <p className="text-xs text-muted-foreground">+{overviews.newBlogsCount} published this month</p>
           </CardContent>
         </Card>
 
@@ -38,8 +61,8 @@ export default function Overviews() {
             <Mail className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">132</div>
-            <p className="text-xs text-muted-foreground">+12 new this month</p>
+            <div className="text-2xl font-bold">{overviews.totalSubscribers}</div>
+            <p className="text-xs text-muted-foreground">+{overviews.newSubscribersCount} new this month</p>
           </CardContent>
         </Card>
       </div>
@@ -52,14 +75,14 @@ export default function Overviews() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
+              {overviews.recentBlogs.map((i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded bg-muted flex items-center justify-center">
                     <FileText className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <div>
-                    <p className="font-medium">Blog Post Title {i}</p>
-                    <p className="text-sm text-muted-foreground">Published on {new Date().toLocaleDateString()}</p>
+                    <p className="font-medium">Blog Post Title {i.title}</p>
+                    <p className="text-sm text-muted-foreground">Published on {formatDate(i.createdAt)}</p>
                   </div>
                 </div>
               ))}
@@ -74,14 +97,14 @@ export default function Overviews() {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {[1, 2, 3].map((i) => (
+              {overviews.recentSubscribers.map((i) => (
                 <div key={i} className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded bg-muted flex items-center justify-center">
                     <Mail className="h-6 w-6 text-muted-foreground" />
                   </div>
                   <div>
-                    <p className="font-medium">subscriber{i}@example.com</p>
-                    <p className="text-sm text-muted-foreground">Subscribed on {new Date().toLocaleDateString()}</p>
+                    <p className="font-medium">{i.email}</p>
+                    <p className="text-sm text-muted-foreground">Subscribed on {formatDate(i.createdAt)}</p>
                   </div>
                 </div>
               ))}
